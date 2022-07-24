@@ -13,7 +13,7 @@
 				<div v-if="!isScan">
 					<el-tabs v-model="tabsActiveName">
 						<el-tab-pane :label="$t('message.label.one1')" name="account">
-							<Account />
+							<Account @signIn="alert(1)" />
 						</el-tab-pane>
 						<el-tab-pane :label="$t('message.label.two2')" name="mobile">
 							<Mobile />
@@ -41,7 +41,6 @@ import Account from '/@/views/login/component/account.vue';
 import Mobile from '/@/views/login/component/mobile.vue';
 import Scan from '/@/views/login/component/scan.vue';
 
-// 定义接口来定义对象的类型
 interface LoginState {
 	tabsActiveName: string;
 	isScan: boolean;
@@ -57,20 +56,24 @@ export default defineComponent({
 			tabsActiveName: 'account',
 			isScan: false,
 		});
-		// 获取布局配置信息
 		const getThemeConfig = computed(() => {
 			return themeConfig.value;
 		});
-		// 页面加载时
 		onMounted(() => {
 			NextLoading.done();
 		});
+
 		return {
 			logoMini,
 			loginIconTwo,
 			getThemeConfig,
 			...toRefs(state),
 		};
+	},
+	methods: {
+		alert(num: number) {
+			alert(num);
+		},
 	},
 });
 </script>

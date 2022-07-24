@@ -56,7 +56,7 @@
 </template>
 
 <script lang="ts">
-import { toRefs, reactive, defineComponent, computed } from 'vue';
+import { toRefs, reactive, defineComponent, computed, provide } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
 import { useI18n } from 'vue-i18n';
@@ -71,7 +71,7 @@ import { NextLoading } from '/@/utils/loading';
 
 export default defineComponent({
 	name: 'loginAccount',
-	setup() {
+	setup(props, context) {
 		const { t } = useI18n();
 		const storesThemeConfig = useThemeConfig();
 		const { themeConfig } = storeToRefs(storesThemeConfig);
@@ -94,29 +94,22 @@ export default defineComponent({
 		});
 		// 登录
 		const onSignIn = async () => {
-			state.loading.signIn = true;
-			// 存储 token 到浏览器缓存
-			Session.set('token', Math.random().toString(36).substr(0));
-			// 模拟数据，对接接口时，记得删除多余代码及对应依赖的引入。用于 `/src/stores/userInfo.ts` 中不同用户登录判断（模拟数据）
-			Cookies.set('userName', state.ruleForm.userName);
-			if (!themeConfig.value.isRequestRoutes) {
-				// 前端控制路由，2、请注意执行顺序
-				await initFrontEndControlRoutes();
-				signInSuccess();
-			} else {
-				// 模拟后端控制路由，isRequestRoutes 为 true，则开启后端控制路由
-				// 添加完动态路由，再进行 router 跳转，否则可能报错 No match found for location with path "/"
-				await initBackEndControlRoutes();
-				// 执行完 initBackEndControlRoutes，再执行 signInSuccess
-				signInSuccess();
-			}
+			console.log(props, context);
+
+			context.emit('signIn');
+			// state.loading.signIn = true;
+			// Session.set('token', Math.random().toString(36).substr(0));
+			// Cookies.set('userName', state.ruleForm.userName);
+			// if (!themeConfig.value.isRequestRoutes) {
+			// 	await initFrontEndControlRoutes();
+			// 	signInSuccess();
+			// } else {
+			// 	await initBackEndControlRoutes();
+			// 	signInSuccess();
+			// }
 		};
-		// 登录成功后的跳转
 		const signInSuccess = () => {
-			// 初始化登录成功时间问候语
 			let currentTimeInfo = currentTime.value;
-			// 登录成功，跳到转首页
-			// 如果是复制粘贴的路径，非首页/登录页，那么登录成功后重定向到对应的路径中
 			if (route.query?.redirect) {
 				router.push({
 					path: <string>route.query?.redirect,
@@ -125,12 +118,10 @@ export default defineComponent({
 			} else {
 				router.push('/');
 			}
-			// 登录成功提示
-			// 关闭 loading
+
 			state.loading.signIn = true;
 			const signInText = t('message.signInText');
 			ElMessage.success(`${currentTimeInfo}，${signInText}`);
-			// 添加 loading，防止第一次进入界面时出现短暂空白
 			NextLoading.start();
 		};
 		return {
