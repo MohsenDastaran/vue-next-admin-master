@@ -13,7 +13,7 @@
 				<div v-if="!isScan">
 					<el-tabs v-model="tabsActiveName">
 						<el-tab-pane :label="$t('message.label.one1')" name="account">
-							<Account @signIn="alert(1)" />
+							<Account @signIn="submit($event)" />
 						</el-tab-pane>
 						<el-tab-pane :label="$t('message.label.two2')" name="mobile">
 							<Mobile />
@@ -31,51 +31,53 @@
 </template>
 
 <script lang="ts">
-import { toRefs, reactive, computed, defineComponent, onMounted } from 'vue';
-import { storeToRefs } from 'pinia';
-import { useThemeConfig } from '/@/stores/themeConfig';
-import logoMini from '/@/assets/logo-mini.svg';
-import loginIconTwo from '/@/assets/login-icon-two.svg';
-import { NextLoading } from '/@/utils/loading';
-import Account from '/@/views/login/component/account.vue';
-import Mobile from '/@/views/login/component/mobile.vue';
-import Scan from '/@/views/login/component/scan.vue';
+import { toRefs, reactive, computed, defineComponent, onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useThemeConfig } from '/@/stores/themeConfig'
+import logoMini from '/@/assets/logo-mini.svg'
+import loginIconTwo from '/@/assets/login-icon-two.svg'
+import { NextLoading } from '/@/utils/loading'
+import Account from '/@/views/login/component/account.vue'
+import Mobile from '/@/views/login/component/mobile.vue'
+import Scan from '/@/views/login/component/scan.vue'
+import { submit } from '/@/api/login/index'
 
 interface LoginState {
-	tabsActiveName: string;
-	isScan: boolean;
+	tabsActiveName: string
+	isScan: boolean
 }
 
 export default defineComponent({
 	name: 'loginIndex',
 	components: { Account, Mobile, Scan },
 	setup() {
-		const storesThemeConfig = useThemeConfig();
-		const { themeConfig } = storeToRefs(storesThemeConfig);
+		const storesThemeConfig = useThemeConfig()
+		const { themeConfig } = storeToRefs(storesThemeConfig)
 		const state = reactive<LoginState>({
 			tabsActiveName: 'account',
-			isScan: false,
-		});
+			isScan: false
+		})
 		const getThemeConfig = computed(() => {
-			return themeConfig.value;
-		});
+			return themeConfig.value
+		})
 		onMounted(() => {
-			NextLoading.done();
-		});
+			NextLoading.done()
+		})
 
 		return {
 			logoMini,
 			loginIconTwo,
 			getThemeConfig,
-			...toRefs(state),
-		};
+			...toRefs(state)
+		}
 	},
 	methods: {
-		alert(num: number) {
-			alert(num);
-		},
-	},
-});
+		submit(data: { userName: string; password: string }) {
+			console.log(data)
+			submit(data.userName, data.password)
+		}
+	}
+})
 </script>
 
 <style scoped lang="scss">

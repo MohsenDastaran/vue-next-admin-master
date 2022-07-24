@@ -56,47 +56,46 @@
 </template>
 
 <script lang="ts">
-import { toRefs, reactive, defineComponent, computed, provide } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { ElMessage } from 'element-plus';
-import { useI18n } from 'vue-i18n';
-import Cookies from 'js-cookie';
-import { storeToRefs } from 'pinia';
-import { useThemeConfig } from '/@/stores/themeConfig';
-import { initFrontEndControlRoutes } from '/@/router/frontEnd';
-import { initBackEndControlRoutes } from '/@/router/backEnd';
-import { Session } from '/@/utils/storage';
-import { formatAxis } from '/@/utils/formatTime';
-import { NextLoading } from '/@/utils/loading';
+import { toRefs, reactive, defineComponent, computed, provide } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
+import { useI18n } from 'vue-i18n'
+import Cookies from 'js-cookie'
+import { storeToRefs } from 'pinia'
+import { useThemeConfig } from '/@/stores/themeConfig'
+import { initFrontEndControlRoutes } from '/@/router/frontEnd'
+import { initBackEndControlRoutes } from '/@/router/backEnd'
+import { Session } from '/@/utils/storage'
+import { formatAxis } from '/@/utils/formatTime'
+import { NextLoading } from '/@/utils/loading'
 
 export default defineComponent({
 	name: 'loginAccount',
 	setup(props, context) {
-		const { t } = useI18n();
-		const storesThemeConfig = useThemeConfig();
-		const { themeConfig } = storeToRefs(storesThemeConfig);
-		const route = useRoute();
-		const router = useRouter();
+		const { t } = useI18n()
+		const storesThemeConfig = useThemeConfig()
+		const { themeConfig } = storeToRefs(storesThemeConfig)
+		const route = useRoute()
+		const router = useRouter()
 		const state = reactive({
 			isShowPassword: false,
 			ruleForm: {
 				userName: 'admin',
 				password: '123456',
-				code: '1234',
+				code: '1234'
 			},
 			loading: {
-				signIn: false,
-			},
-		});
+				signIn: false
+			}
+		})
 		// 时间获取
 		const currentTime = computed(() => {
-			return formatAxis(new Date());
-		});
+			return formatAxis(new Date())
+		})
 		// 登录
 		const onSignIn = async () => {
-			console.log(props, context);
+			context.emit('signIn', state.ruleForm)
 
-			context.emit('signIn');
 			// state.loading.signIn = true;
 			// Session.set('token', Math.random().toString(36).substr(0));
 			// Cookies.set('userName', state.ruleForm.userName);
@@ -107,29 +106,29 @@ export default defineComponent({
 			// 	await initBackEndControlRoutes();
 			// 	signInSuccess();
 			// }
-		};
+		}
 		const signInSuccess = () => {
-			let currentTimeInfo = currentTime.value;
+			let currentTimeInfo = currentTime.value
 			if (route.query?.redirect) {
 				router.push({
 					path: <string>route.query?.redirect,
-					query: Object.keys(<string>route.query?.params).length > 0 ? JSON.parse(<string>route.query?.params) : '',
-				});
+					query: Object.keys(<string>route.query?.params).length > 0 ? JSON.parse(<string>route.query?.params) : ''
+				})
 			} else {
-				router.push('/');
+				router.push('/')
 			}
 
-			state.loading.signIn = true;
-			const signInText = t('message.signInText');
-			ElMessage.success(`${currentTimeInfo}，${signInText}`);
-			NextLoading.start();
-		};
+			state.loading.signIn = true
+			const signInText = t('message.signInText')
+			ElMessage.success(`${currentTimeInfo}，${signInText}`)
+			NextLoading.start()
+		}
 		return {
 			onSignIn,
-			...toRefs(state),
-		};
-	},
-});
+			...toRefs(state)
+		}
+	}
+})
 </script>
 
 <style scoped lang="scss">
