@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import pinia from '/@/stores/index'
+import jwt from '/@/modules/jwt'
 import { storeToRefs } from 'pinia'
 import { useKeepALiveNames } from '/@/stores/keepAliveNames'
 import { useRoutesList } from '/@/stores/routesList'
@@ -58,17 +59,17 @@ export function formatTwoStageRoutes(arr: any) {
 router.beforeEach(async (to, from, next) => {
 	NProgress.configure({ showSpinner: false })
 	NProgress.start()
-	const jwt = storage.get(StorageKey.jwt)
-	console.log(jwt)
+	jwt.getJwtFromLocalAndCheck()
+	const localJWT = jwt.getJwt()
 
-	if (to.path === '/login' && !jwt) {
+	if (to.path === '/login' && !localJWT) {
 		console.log(1)
 		next()
 	} else {
-		if (!jwt) {
+		if (!localJWT) {
 			router.push('login')
 			Session.clear()
-		} else if (jwt && to.path === '/login') {
+		} else if (localJWT && to.path === '/login') {
 			next()
 		} else {
 			const storesRoutesList = useRoutesList(pinia)
