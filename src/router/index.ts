@@ -8,10 +8,9 @@ import { useKeepALiveNames } from '/@/stores/keepAliveNames'
 import { useRoutesList } from '/@/stores/routesList'
 import { useThemeConfig } from '/@/stores/themeConfig'
 import { Session } from '/@/utils/storage'
-import { staticRoutes } from '/@/router/route'
+import { staticRoutes, rxLangPath } from './routes'
 import { initFrontEndControlRoutes } from '/@/router/frontEnd'
 import { initBackEndControlRoutes } from '/@/router/backEnd'
-import storage, { StorageKey } from '../modules/storage'
 
 const storesThemeConfig = useThemeConfig(pinia)
 const { themeConfig } = storeToRefs(storesThemeConfig)
@@ -87,10 +86,74 @@ router.beforeEach(async (to, from, next) => {
 			}
 		}
 	}
+
+	_fixUrl(to.fullPath)
+	let langCode = to.params.lang
+	const pathWithoutLang = to.path.replace(`/${langCode}`, '')
+	const fullPathWithoutLang = to.fullPath.replace(`/${langCode}`, '')
+	const paths = router.getRoutes().map((route) => {
+		return route.path.replaceAll(rxLangPath, '')
+	})
+
+	if (paths.includes(to.path)) {
+		langCode = 'fa' || 'en'
+		// i18n.setActiveLangCode(langCode)
+		next()
+	} else if (
+		paths.includes(pathWithoutLang)
+		//  && i18n.isSupportedLang(langCode)
+	) {
+		// @todo en move to .env
+		if (langCode === 'en') {
+			redirectRoute(fullPathWithoutLang)
+		}
+		// i18n.setActiveLangCode(langCode)
+		next()
+	} else {
+		redirectError(404)
+	}
 })
 
 router.afterEach(() => {
 	NProgress.done()
 })
 
+function _fixUrl(url: string) {
+	let fixedUrl = url
+	const duplicateSlash = /\/{2,}/g
+	if (url.match(duplicateSlash)) fixedUrl = url.replace(duplicateSlash, '/')
+	const endSlash = /\/$/
+	if (url.match(endSlash)) fixedUrl = url.replace(endSlash, '')
+	if (url !== fixedUrl) {
+		return redirectRoute(fixedUrl)
+	}
+}
+function changePage({ to, query, isStatic }: { to: string; query?: {}; isStatic?: boolean }) {
+	if (isStatic) {
+		window.location.href = query ? to + query : to
+	} else {
+		router
+			.push({
+				name: to,
+				path: to,
+				//   params:
+				//     i18n.activeLangCode !== process.env.VUE_APP_I18N_LOCALE
+				//       ? { lang: i18n.activeLangCode }
+				//       : undefined,
+				query
+			})
+			.catch(() => true)
+	}
+}
+function redirectError(errorCode: number) {
+	window.location.href = window.location.origin + `/${errorCode}.html`
+}
+function redirectRoute(page: string) {
+	router.push(page[0] == '/' ? page : '/' + page).catch(() => true)
+}
+function vueModulePaths() {
+	router.getRoutes().map((route) => {
+		return route.path.replaceAll(rxLangPath, '')
+	})
+}
 export default router

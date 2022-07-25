@@ -1,4 +1,4 @@
-import { RouteRecordRaw } from 'vue-router';
+import { RouteRecordRaw } from 'vue-router'
 
 /**
  * 路由meta对象参数说明
@@ -21,6 +21,8 @@ import { RouteRecordRaw } from 'vue-router';
  * @description 各字段请查看 `/@/views/system/menu/component/addMenu.vue 下的 ruleForm`
  * @returns 返回路由菜单数据
  */
+export const auth = '/auth/'
+export const rxLangPath = '/:lang(\\w{2})*'
 export const dynamicRoutes: Array<RouteRecordRaw> = [
 	{
 		path: '/',
@@ -28,7 +30,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 		component: () => import('/@/layout/index.vue'),
 		redirect: '/home',
 		meta: {
-			isKeepAlive: true,
+			isKeepAlive: true
 		},
 		children: [
 			{
@@ -43,8 +45,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 					isAffix: true,
 					isIframe: false,
 					roles: ['admin', 'common'],
-					icon: 'iconfont icon-shouye',
-				},
+					icon: 'iconfont icon-shouye'
+				}
 			},
 			{
 				path: '/test',
@@ -58,8 +60,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 					isAffix: true,
 					isIframe: false,
 					roles: ['admin', 'common'],
-					icon: 'iconfont icon-shouye',
-				},
+					icon: 'iconfont icon-shouye'
+				}
 			},
 			{
 				path: '/system',
@@ -74,7 +76,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 					isAffix: false,
 					isIframe: false,
 					roles: ['admin'],
-					icon: 'iconfont icon-xitongshezhi',
+					icon: 'iconfont icon-xitongshezhi'
 				},
 				children: [
 					{
@@ -89,8 +91,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin'],
-							icon: 'iconfont icon-caidan',
-						},
+							icon: 'iconfont icon-caidan'
+						}
 					},
 					{
 						path: '/system/role',
@@ -104,8 +106,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin'],
-							icon: 'ele-ColdDrink',
-						},
+							icon: 'ele-ColdDrink'
+						}
 					},
 					{
 						path: '/system/user',
@@ -119,8 +121,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin'],
-							icon: 'iconfont icon-icon-',
-						},
+							icon: 'iconfont icon-icon-'
+						}
 					},
 					{
 						path: '/system/dept',
@@ -134,8 +136,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin'],
-							icon: 'ele-OfficeBuilding',
-						},
+							icon: 'ele-OfficeBuilding'
+						}
 					},
 					{
 						path: '/system/dic',
@@ -149,10 +151,10 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin'],
-							icon: 'ele-SetUp',
-						},
-					},
-				],
+							icon: 'ele-SetUp'
+						}
+					}
+				]
 			},
 			{
 				path: '/limits',
@@ -167,7 +169,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 					isAffix: false,
 					isIframe: false,
 					roles: ['admin', 'common'],
-					icon: 'iconfont icon-quanxian',
+					icon: 'iconfont icon-quanxian'
 				},
 				children: [
 					{
@@ -183,7 +185,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: '',
+							icon: ''
 						},
 						children: [
 							{
@@ -198,8 +200,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 									isAffix: false,
 									isIframe: false,
 									roles: ['admin', 'common'],
-									icon: '',
-								},
+									icon: ''
+								}
 							},
 							{
 								path: '/limits/frontEnd/btn',
@@ -213,10 +215,10 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 									isAffix: false,
 									isIframe: false,
 									roles: ['admin', 'common'],
-									icon: '',
-								},
-							},
-						],
+									icon: ''
+								}
+							}
+						]
 					},
 					{
 						path: '/limits/backEnd',
@@ -230,7 +232,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: '',
+							icon: ''
 						},
 						children: [
 							{
@@ -245,12 +247,12 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 									isAffix: false,
 									isIframe: false,
 									roles: ['admin', 'common'],
-									icon: '',
-								},
-							},
-						],
-					},
-				],
+									icon: ''
+								}
+							}
+						]
+					}
+				]
 			},
 			{
 				path: '/menu',
@@ -265,7 +267,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 					isAffix: false,
 					isIframe: false,
 					roles: ['admin', 'common'],
-					icon: 'iconfont icon-caidan',
+					icon: 'iconfont icon-caidan'
 				},
 				children: [
 					{
@@ -281,7 +283,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'iconfont icon-caidan',
+							icon: 'iconfont icon-caidan'
 						},
 						children: [
 							{
@@ -296,8 +298,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 									isAffix: false,
 									isIframe: false,
 									roles: ['admin', 'common'],
-									icon: 'iconfont icon-caidan',
-								},
+									icon: 'iconfont icon-caidan'
+								}
 							},
 							{
 								path: '/menu/menu1/menu12',
@@ -312,7 +314,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 									isAffix: false,
 									isIframe: false,
 									roles: ['admin', 'common'],
-									icon: 'iconfont icon-caidan',
+									icon: 'iconfont icon-caidan'
 								},
 								children: [
 									{
@@ -327,8 +329,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 											isAffix: false,
 											isIframe: false,
 											roles: ['admin', 'common'],
-											icon: 'iconfont icon-caidan',
-										},
+											icon: 'iconfont icon-caidan'
+										}
 									},
 									{
 										path: '/menu/menu1/menu12/menu122',
@@ -342,10 +344,10 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 											isAffix: false,
 											isIframe: false,
 											roles: ['admin', 'common'],
-											icon: 'iconfont icon-caidan',
-										},
-									},
-								],
+											icon: 'iconfont icon-caidan'
+										}
+									}
+								]
 							},
 							{
 								path: '/menu/menu1/menu13',
@@ -359,10 +361,10 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 									isAffix: false,
 									isIframe: false,
 									roles: ['admin', 'common'],
-									icon: 'iconfont icon-caidan',
-								},
-							},
-						],
+									icon: 'iconfont icon-caidan'
+								}
+							}
+						]
 					},
 					{
 						path: '/menu/menu2',
@@ -376,10 +378,10 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'iconfont icon-caidan',
-						},
-					},
-				],
+							icon: 'iconfont icon-caidan'
+						}
+					}
+				]
 			},
 			{
 				path: '/fun',
@@ -394,7 +396,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 					isAffix: false,
 					isIframe: false,
 					roles: ['admin', 'common'],
-					icon: 'iconfont icon-crew_feature',
+					icon: 'iconfont icon-crew_feature'
 				},
 				children: [
 					{
@@ -409,8 +411,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'ele-Pointer',
-						},
+							icon: 'ele-Pointer'
+						}
 					},
 					{
 						path: '/fun/countup',
@@ -424,8 +426,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'ele-Odometer',
-						},
+							icon: 'ele-Odometer'
+						}
 					},
 					{
 						path: '/fun/wangEditor',
@@ -439,8 +441,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'iconfont icon-fuwenbenkuang',
-						},
+							icon: 'iconfont icon-fuwenbenkuang'
+						}
 					},
 					{
 						path: '/fun/cropper',
@@ -454,8 +456,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'iconfont icon-caijian',
-						},
+							icon: 'iconfont icon-caijian'
+						}
 					},
 					{
 						path: '/fun/qrcode',
@@ -469,8 +471,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'iconfont icon-ico',
-						},
+							icon: 'iconfont icon-ico'
+						}
 					},
 					{
 						path: '/fun/echartsMap',
@@ -484,8 +486,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'iconfont icon-ditu',
-						},
+							icon: 'iconfont icon-ditu'
+						}
 					},
 					{
 						path: '/fun/printJs',
@@ -499,8 +501,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'ele-Printer',
-						},
+							icon: 'ele-Printer'
+						}
 					},
 					{
 						path: '/fun/clipboard',
@@ -514,8 +516,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'ele-DocumentCopy',
-						},
+							icon: 'ele-DocumentCopy'
+						}
 					},
 					{
 						path: '/fun/gridLayout',
@@ -529,8 +531,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'iconfont icon-tuodong',
-						},
+							icon: 'iconfont icon-tuodong'
+						}
 					},
 					{
 						path: '/fun/splitpanes',
@@ -544,10 +546,10 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'iconfont icon--chaifenlie',
-						},
-					},
-				],
+							icon: 'iconfont icon--chaifenlie'
+						}
+					}
+				]
 			},
 			{
 				path: '/pages',
@@ -562,7 +564,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 					isAffix: false,
 					isIframe: false,
 					roles: ['admin', 'common'],
-					icon: 'iconfont icon-fuzhiyemian',
+					icon: 'iconfont icon-fuzhiyemian'
 				},
 				children: [
 					{
@@ -577,7 +579,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'ele-Sell',
+							icon: 'ele-Sell'
 						},
 						/**
 						 * 注意此处详情写法：
@@ -598,10 +600,10 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 									isAffix: false,
 									isIframe: false,
 									roles: ['admin', 'common'],
-									icon: 'ele-Sunny',
-								},
-							},
-						],
+									icon: 'ele-Sunny'
+								}
+							}
+						]
 					},
 					{
 						path: '/pages/filtering/details1',
@@ -615,8 +617,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'ele-Sunny',
-						},
+							icon: 'ele-Sunny'
+						}
 					},
 					{
 						path: '/pages/iocnfont',
@@ -630,8 +632,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'ele-Present',
-						},
+							icon: 'ele-Present'
+						}
 					},
 					{
 						path: '/pages/element',
@@ -645,8 +647,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'ele-Eleme',
-						},
+							icon: 'ele-Eleme'
+						}
 					},
 					{
 						path: '/pages/awesome',
@@ -660,8 +662,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'ele-SetUp',
-						},
+							icon: 'ele-SetUp'
+						}
 					},
 					{
 						path: '/pages/formAdapt',
@@ -675,8 +677,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'iconfont icon-biaodan',
-						},
+							icon: 'iconfont icon-biaodan'
+						}
 					},
 					{
 						path: '/pages/tableRules',
@@ -690,8 +692,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'iconfont icon-jiliandongxuanzeqi',
-						},
+							icon: 'iconfont icon-jiliandongxuanzeqi'
+						}
 					},
 					{
 						path: '/pages/formI18n',
@@ -705,8 +707,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'iconfont icon-diqiu',
-						},
+							icon: 'iconfont icon-diqiu'
+						}
 					},
 					{
 						path: '/pages/formRules',
@@ -720,8 +722,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'iconfont icon-shuxing',
-						},
+							icon: 'iconfont icon-shuxing'
+						}
 					},
 					{
 						path: '/pages/listAdapt',
@@ -735,8 +737,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'iconfont icon-chazhaobiaodanliebiao',
-						},
+							icon: 'iconfont icon-chazhaobiaodanliebiao'
+						}
 					},
 					{
 						path: '/pages/waterfall',
@@ -750,8 +752,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'iconfont icon-zidingyibuju',
-						},
+							icon: 'iconfont icon-zidingyibuju'
+						}
 					},
 					{
 						path: '/pages/steps',
@@ -765,8 +767,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'iconfont icon-step',
-						},
+							icon: 'iconfont icon-step'
+						}
 					},
 					{
 						path: '/pages/preview',
@@ -780,8 +782,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'iconfont icon-15tupianyulan',
-						},
+							icon: 'iconfont icon-15tupianyulan'
+						}
 					},
 					{
 						path: '/pages/waves',
@@ -795,8 +797,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'iconfont icon-bolangneng',
-						},
+							icon: 'iconfont icon-bolangneng'
+						}
 					},
 					{
 						path: '/pages/tree',
@@ -810,8 +812,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'iconfont icon-shuxingtu',
-						},
+							icon: 'iconfont icon-shuxingtu'
+						}
 					},
 					{
 						path: '/pages/drag',
@@ -825,8 +827,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'ele-Pointer',
-						},
+							icon: 'ele-Pointer'
+						}
 					},
 					{
 						path: '/pages/lazyImg',
@@ -840,8 +842,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin'],
-							icon: 'ele-PictureFilled',
-						},
+							icon: 'ele-PictureFilled'
+						}
 					},
 					{
 						path: '/pages/dynamicForm',
@@ -855,8 +857,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin'],
-							icon: 'iconfont icon-diannao',
-						},
+							icon: 'iconfont icon-diannao'
+						}
 					},
 					{
 						path: '/pages/workflow',
@@ -870,10 +872,10 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin'],
-							icon: 'ele-Connection',
-						},
-					},
-				],
+							icon: 'ele-Connection'
+						}
+					}
+				]
 			},
 			{
 				path: '/make',
@@ -888,7 +890,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 					isAffix: false,
 					isIframe: false,
 					roles: ['admin'],
-					icon: 'iconfont icon-siweidaotu',
+					icon: 'iconfont icon-siweidaotu'
 				},
 				children: [
 					{
@@ -903,8 +905,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'iconfont icon-xuanzeqi',
-						},
+							icon: 'iconfont icon-xuanzeqi'
+						}
 					},
 					{
 						path: '/make/noticeBar',
@@ -918,8 +920,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'ele-Bell',
-						},
+							icon: 'ele-Bell'
+						}
 					},
 					{
 						path: '/make/svgDemo',
@@ -933,10 +935,10 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin', 'common'],
-							icon: 'fa fa-thumbs-o-up',
-						},
-					},
-				],
+							icon: 'fa fa-thumbs-o-up'
+						}
+					}
+				]
 			},
 			{
 				path: '/params',
@@ -951,7 +953,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 					isAffix: false,
 					isIframe: false,
 					roles: ['admin'],
-					icon: 'iconfont icon-zhongduancanshu',
+					icon: 'iconfont icon-zhongduancanshu'
 				},
 				children: [
 					{
@@ -966,8 +968,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin'],
-							icon: 'iconfont icon-putong',
-						},
+							icon: 'iconfont icon-putong'
+						}
 					},
 					{
 						path: '/params/common/details',
@@ -981,8 +983,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin'],
-							icon: 'ele-Comment',
-						},
+							icon: 'ele-Comment'
+						}
 					},
 					{
 						path: '/params/dynamic',
@@ -996,8 +998,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin'],
-							icon: 'iconfont icon-dongtai',
-						},
+							icon: 'iconfont icon-dongtai'
+						}
 					},
 					/**
 					 * tagsViewName 为要设置不同的 "tagsView 名称" 字段
@@ -1015,10 +1017,10 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin'],
-							icon: 'ele-Lightning',
-						},
-					},
-				],
+							icon: 'ele-Lightning'
+						}
+					}
+				]
 			},
 			{
 				path: '/visualizing',
@@ -1033,7 +1035,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 					isAffix: false,
 					isIframe: false,
 					roles: ['admin'],
-					icon: 'ele-ChatLineRound',
+					icon: 'ele-ChatLineRound'
 				},
 				children: [
 					{
@@ -1048,8 +1050,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin'],
-							icon: 'iconfont icon-caozuo-wailian',
-						},
+							icon: 'iconfont icon-caozuo-wailian'
+						}
 					},
 					{
 						path: '/visualizing/visualizingLinkDemo2',
@@ -1063,10 +1065,10 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							isAffix: false,
 							isIframe: false,
 							roles: ['admin'],
-							icon: 'iconfont icon-caozuo-wailian',
-						},
-					},
-				],
+							icon: 'iconfont icon-caozuo-wailian'
+						}
+					}
+				]
 			},
 			{
 				path: '/chart',
@@ -1080,8 +1082,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 					isAffix: false,
 					isIframe: false,
 					roles: ['admin', 'common'],
-					icon: 'iconfont icon-ico_shuju',
-				},
+					icon: 'iconfont icon-ico_shuju'
+				}
 			},
 			{
 				path: '/personal',
@@ -1095,8 +1097,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 					isAffix: false,
 					isIframe: false,
 					roles: ['admin', 'common'],
-					icon: 'iconfont icon-gerenzhongxin',
-				},
+					icon: 'iconfont icon-gerenzhongxin'
+				}
 			},
 			{
 				path: '/tools',
@@ -1110,8 +1112,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 					isAffix: false,
 					isIframe: false,
 					roles: ['admin', 'common'],
-					icon: 'iconfont icon-gongju',
-				},
+					icon: 'iconfont icon-gongju'
+				}
 			},
 			{
 				path: '/link',
@@ -1125,8 +1127,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 					isAffix: false,
 					isIframe: false,
 					roles: ['admin'],
-					icon: 'iconfont icon-caozuo-wailian',
-				},
+					icon: 'iconfont icon-caozuo-wailian'
+				}
 			},
 			{
 				path: '/iframes',
@@ -1140,12 +1142,12 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 					isAffix: true,
 					isIframe: true,
 					roles: ['admin'],
-					icon: 'iconfont icon-neiqianshujuchucun',
-				},
-			},
-		],
-	},
-];
+					icon: 'iconfont icon-neiqianshujuchucun'
+				}
+			}
+		]
+	}
+]
 
 /**
  * 定义404、401界面
@@ -1158,8 +1160,8 @@ export const notFoundAndNoPower = [
 		component: () => import('/@/views/error/404.vue'),
 		meta: {
 			title: 'message.staticRoutes.notFound',
-			isHide: true,
-		},
+			isHide: true
+		}
 	},
 	{
 		path: '/401',
@@ -1167,10 +1169,10 @@ export const notFoundAndNoPower = [
 		component: () => import('/@/views/error/401.vue'),
 		meta: {
 			title: 'message.staticRoutes.noPower',
-			isHide: true,
-		},
-	},
-];
+			isHide: true
+		}
+	}
+]
 
 /**
  * 定义静态路由（默认路由）
@@ -1184,27 +1186,23 @@ export const staticRoutes: Array<RouteRecordRaw> = [
 		name: 'login',
 		component: () => import('/@/views/login/index.vue'),
 		meta: {
-			title: 'Login',
-		},
+			title: 'Login'
+		}
 	},
-	/**
-	 * 提示：写在这里的为全屏界面，不建议写在这里
-	 * 请写在 `dynamicRoutes` 路由数组中
-	 */
 	{
 		path: '/visualizingDemo1',
 		name: 'visualizingDemo1',
 		component: () => import('/@/views/visualizing/demo1.vue'),
 		meta: {
-			title: 'message.router.visualizingLinkDemo1',
-		},
+			title: 'message.router.visualizingLinkDemo1'
+		}
 	},
 	{
 		path: '/visualizingDemo2',
 		name: 'visualizingDemo2',
 		component: () => import('/@/views/visualizing/demo2.vue'),
 		meta: {
-			title: 'message.router.visualizingLinkDemo2',
-		},
-	},
-];
+			title: 'message.router.visualizingLinkDemo2'
+		}
+	}
+]

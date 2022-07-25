@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { formatTwoStageRoutes, formatFlatteningRoutes, router } from '/@/router/index'
-import { dynamicRoutes, notFoundAndNoPower } from '/@/router/route'
+import { dynamicRoutes, notFoundAndNoPower } from './routes'
 import pinia from '/@/stores/index'
 import { useUserInfo } from '/@/stores/userInfo'
 import { useTagsViewRoutes } from '/@/stores/tagsViewRoutes'
