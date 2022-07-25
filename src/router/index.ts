@@ -10,6 +10,7 @@ import { Session } from '/@/utils/storage'
 import { staticRoutes } from '/@/router/route'
 import { initFrontEndControlRoutes } from '/@/router/frontEnd'
 import { initBackEndControlRoutes } from '/@/router/backEnd'
+import storage, { StorageKey } from '../modules/storage'
 
 const storesThemeConfig = useThemeConfig(pinia)
 const { themeConfig } = storeToRefs(storesThemeConfig)
@@ -56,31 +57,47 @@ export function formatTwoStageRoutes(arr: any) {
 
 router.beforeEach(async (to, from, next) => {
 	NProgress.configure({ showSpinner: false })
-	if (to.meta.title) NProgress.start()
+	NProgress.start()
 	const token = Session.get('token')
-	if (to.path === '/login' && !token) {
+	const jwt = storage.get(StorageKey.jwt)
+	console.log(jwt)
+
+	if (to.path === '/login' && !jwt) {
+		console.log(1)
 		next()
 		NProgress.done()
 	} else {
-		if (!token) {
-			next(`/login?redirect=${to.path}&params=${JSON.stringify(to.query ? to.query : to.params)}`)
+		if (!jwt) {
+			console.log(2)
+			router.push('login')
+
 			Session.clear()
 			NProgress.done()
-		} else if (token && to.path === '/login') {
-			next('/home')
+		} else if (jwt && to.path === '/login') {
+			console.log(3)
+			next()
+
 			NProgress.done()
 		} else {
+			console.log(4)
+
 			const storesRoutesList = useRoutesList(pinia)
 			const { routesList } = storeToRefs(storesRoutesList)
 			if (routesList.value.length === 0) {
 				if (isRequestRoutes) {
+					console.log('10')
+
 					await initBackEndControlRoutes()
 					next({ ...to, replace: true })
 				} else {
+					console.log('11')
+
 					await initFrontEndControlRoutes()
 					next({ ...to, replace: true })
 				}
 			} else {
+				console.log(5)
+
 				next()
 			}
 		}

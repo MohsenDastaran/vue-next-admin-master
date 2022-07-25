@@ -13,7 +13,7 @@
 				<div v-if="!isScan">
 					<el-tabs v-model="tabsActiveName">
 						<el-tab-pane :label="$t('message.label.one1')" name="account">
-							<Account @signIn="submit($event)" />
+							<Account @signIn="submit($event)" :loadingSignIn="loading" />
 						</el-tab-pane>
 						<el-tab-pane :label="$t('message.label.two2')" name="mobile">
 							<Mobile />
@@ -50,6 +50,9 @@ interface LoginState {
 export default defineComponent({
 	name: 'loginIndex',
 	components: { Account, Mobile, Scan },
+	data: () => ({
+		loading: false
+	}),
 	setup() {
 		const storesThemeConfig = useThemeConfig()
 		const { themeConfig } = storeToRefs(storesThemeConfig)
@@ -73,8 +76,8 @@ export default defineComponent({
 	},
 	methods: {
 		submit(data: { userName: string; password: string }) {
-			console.log(data)
-			submit(data.userName, data.password)
+			this.loading = true
+			submit(data.userName, data.password).finally(() => (this.loading = false))
 		}
 	}
 })

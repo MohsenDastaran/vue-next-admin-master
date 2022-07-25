@@ -48,7 +48,7 @@
 			</el-col>
 		</el-form-item>
 		<el-form-item class="login-animation4">
-			<el-button type="primary" class="login-content-submit" round @click="onSignIn" :loading="loading.signIn">
+			<el-button type="primary" class="login-content-submit" round @click="onSignIn" :loading="loadingSignIn">
 				<span>{{ $t('message.account.accountBtnText') }}</span>
 			</el-button>
 		</el-form-item>
@@ -56,21 +56,22 @@
 </template>
 
 <script lang="ts">
-import { toRefs, reactive, defineComponent, computed, provide } from 'vue'
+import { toRefs, reactive, defineComponent, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { useI18n } from 'vue-i18n'
-import Cookies from 'js-cookie'
 import { storeToRefs } from 'pinia'
 import { useThemeConfig } from '/@/stores/themeConfig'
-import { initFrontEndControlRoutes } from '/@/router/frontEnd'
-import { initBackEndControlRoutes } from '/@/router/backEnd'
-import { Session } from '/@/utils/storage'
+// import { initFrontEndControlRoutes } from '/@/router/frontEnd'
+// import { initBackEndControlRoutes } from '/@/router/backEnd'
 import { formatAxis } from '/@/utils/formatTime'
 import { NextLoading } from '/@/utils/loading'
 
 export default defineComponent({
 	name: 'loginAccount',
+	props: {
+		loadingSignIn: Boolean
+	},
 	setup(props, context) {
 		const { t } = useI18n()
 		const storesThemeConfig = useThemeConfig()
@@ -83,9 +84,6 @@ export default defineComponent({
 				userName: 'admin',
 				password: '123456',
 				code: '1234'
-			},
-			loading: {
-				signIn: false
 			}
 		})
 		// 时间获取
@@ -96,15 +94,16 @@ export default defineComponent({
 		const onSignIn = async () => {
 			context.emit('signIn', state.ruleForm)
 
-			// state.loading.signIn = true;
-			// Session.set('token', Math.random().toString(36).substr(0));
-			// Cookies.set('userName', state.ruleForm.userName);
 			// if (!themeConfig.value.isRequestRoutes) {
-			// 	await initFrontEndControlRoutes();
-			// 	signInSuccess();
+			// 	console.log('front')
+
+			// 	await initFrontEndControlRoutes()
+			// 	signInSuccess()
 			// } else {
-			// 	await initBackEndControlRoutes();
-			// 	signInSuccess();
+			// 	console.log('back')
+
+			// 	await initBackEndControlRoutes()
+			// 	signInSuccess()
 			// }
 		}
 		const signInSuccess = () => {
@@ -118,7 +117,6 @@ export default defineComponent({
 				router.push('/')
 			}
 
-			state.loading.signIn = true
 			const signInText = t('message.signInText')
 			ElMessage.success(`${currentTimeInfo}，${signInText}`)
 			NextLoading.start()

@@ -7,6 +7,8 @@ import md5 from 'md5'
 import randomSalt from '/@/api/modules/salt'
 import { ExAPIAccessDenied, ExAPIBadRequest, ExAPIUnauthorized, ExAPIPreconditionRequired, ExAPINetwork } from '/@/api/exceptions/APIExceptions'
 import request from '/@/utils/request'
+import { Session } from '/@/utils/storage'
+import Cookies from 'js-cookie'
 
 export async function submit(emailOrMobile: string, password: string) {
 	// if (this.emailOrMobile && this.password) {
@@ -28,9 +30,12 @@ export async function submit(emailOrMobile: string, password: string) {
 			}
 		).then((response: any) => {
 			jwt.set(response.data.result)
+			Session.set('token', Math.random().toString(36).substr(0))
+			Cookies.set('userName', emailOrMobile)
 			router.push('home')
 		})
 	} catch (error) {
+		alert('wrongPass')
 		if (error instanceof ExAPIUnauthorized || error instanceof ExAPIBadRequest || error instanceof ExAPIAccessDenied) {
 		} else if (error instanceof ExAPIPreconditionRequired) {
 			// this.requiredConfirmCode()
