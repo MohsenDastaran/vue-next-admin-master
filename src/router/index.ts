@@ -58,46 +58,30 @@ export function formatTwoStageRoutes(arr: any) {
 router.beforeEach(async (to, from, next) => {
 	NProgress.configure({ showSpinner: false })
 	NProgress.start()
-	const token = Session.get('token')
 	const jwt = storage.get(StorageKey.jwt)
 	console.log(jwt)
 
 	if (to.path === '/login' && !jwt) {
 		console.log(1)
 		next()
-		NProgress.done()
 	} else {
 		if (!jwt) {
-			console.log(2)
 			router.push('login')
-
 			Session.clear()
-			NProgress.done()
 		} else if (jwt && to.path === '/login') {
-			console.log(3)
 			next()
-
-			NProgress.done()
 		} else {
-			console.log(4)
-
 			const storesRoutesList = useRoutesList(pinia)
 			const { routesList } = storeToRefs(storesRoutesList)
 			if (routesList.value.length === 0) {
 				if (isRequestRoutes) {
-					console.log('10')
-
 					await initBackEndControlRoutes()
 					next({ ...to, replace: true })
 				} else {
-					console.log('11')
-
 					await initFrontEndControlRoutes()
 					next({ ...to, replace: true })
 				}
 			} else {
-				console.log(5)
-
 				next()
 			}
 		}
@@ -105,8 +89,6 @@ router.beforeEach(async (to, from, next) => {
 })
 
 router.afterEach(() => {
-	console.log('after')
-
 	NProgress.done()
 })
 
