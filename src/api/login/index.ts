@@ -6,7 +6,7 @@ import ApiClient from '/@/api/modules/api'
 import md5 from 'md5'
 import randomSalt from '/@/api/modules/salt'
 import { ExAPIAccessDenied, ExAPIBadRequest, ExAPIUnauthorized, ExAPIPreconditionRequired, ExAPINetwork } from '/@/api/exceptions/APIExceptions'
-// import request from '/@/utils/request'
+import request from '/@/utils/request'
 
 export async function submit(emailOrMobile: string, password: string) {
 	// if (this.emailOrMobile && this.password) {
@@ -28,7 +28,7 @@ export async function submit(emailOrMobile: string, password: string) {
 			}
 		).then((response: any) => {
 			jwt.set(response.data.result)
-			router.push
+			router.push('home')
 		})
 	} catch (error) {
 		if (error instanceof ExAPIUnauthorized || error instanceof ExAPIBadRequest || error instanceof ExAPIAccessDenied) {
@@ -40,24 +40,26 @@ export async function submit(emailOrMobile: string, password: string) {
 			// AuthErrorModule.setErrorText(error)
 		}
 	} finally {
-		// AuthSpinnerModule.diactivateSpinner()
 	}
 	// } else {
-	// 	AuthErrorModule.setErrorText($t('fillAllInputs'))
 	// }
+}
 
-	// signIn: (params: object) => {
-	// 	return request({
-	// 		url: '/user/signIn',
-	// 		method: 'post',
-	// 		data: params,
-	// 	});
-	// },
-	// signOut: (params: object) => {
-	// 	return request({
-	// 		url: '/user/signOut',
-	// 		method: 'post',
-	// 		data: params,
-	// 	});
-	// },
+export function useLoginApi() {
+	return {
+		signIn: (params: object) => {
+			return request({
+				url: '/user/signIn',
+				method: 'post',
+				data: params
+			})
+		},
+		signOut: (params: object) => {
+			return request({
+				url: '/user/signOut',
+				method: 'post',
+				data: params
+			})
+		}
+	}
 }
