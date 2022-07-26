@@ -34,67 +34,66 @@
 </template>
 
 <script lang="ts">
-import { toRefs, reactive, computed, defineComponent } from 'vue';
-import { useRouter } from 'vue-router';
-import { storeToRefs } from 'pinia';
-import { useThemeConfig } from '/@/stores/themeConfig';
-import { useTagsViewRoutes } from '/@/stores/tagsViewRoutes';
+import { toRefs, reactive, computed, defineComponent } from 'vue'
+import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
+import { useThemeConfig } from '/@/stores/themeConfig'
+import { useTagsViewRoutes } from '/@/stores/tagsViewRoutes'
 
 export default defineComponent({
 	name: 'paramsCommon',
 	setup() {
-		const storesTagsViewRoutes = useTagsViewRoutes();
-		const storesThemeConfig = useThemeConfig();
-		const { themeConfig } = storeToRefs(storesThemeConfig);
-		const { isTagsViewCurrenFull } = storeToRefs(storesTagsViewRoutes);
+		const storesTagsViewRoutes = useTagsViewRoutes()
+		const storesThemeConfig = useThemeConfig()
+		const { themeConfig } = storeToRefs(storesThemeConfig)
+		const { isTagsViewCurrenFull } = storeToRefs(storesTagsViewRoutes)
 		const state = reactive({
 			value: '',
 			tagsViewName: '',
-			tagsViewNameIsI18n: false,
-		});
-		const router = useRouter();
+			tagsViewNameIsI18n: false
+		})
+		const router = useRouter()
 		// 设置 view 的高度
 		const setViewHeight = computed(() => {
-			let { isTagsview } = themeConfig.value;
+			let { isTagsview } = themeConfig.value
 			if (isTagsViewCurrenFull.value) {
-				return `30px`;
+				return `30px`
 			} else {
-				if (isTagsview) return `114px`;
-				else return `80px`;
+				if (isTagsview) return `114px`
+				else return `80px`
 			}
-		});
+		})
 		// 跳转到详情
 		/**
 		 * 设置 tagsView 名称：
 		 * 传不同的 tagsViewName 值
 		 */
 		const onGoDetailsClick = () => {
-			const params: any = { id: state.value };
-			if (state.tagsViewName) params.tagsViewName = state.tagsViewName;
+			const params: any = { id: state.value }
+			if (state.tagsViewName) params.tagsViewName = state.tagsViewName
 			router.push({
 				path: '/params/common/details',
-				query: params,
-			});
-			state.value = '';
-		};
+				query: params
+			})
+			state.value = ''
+		}
 		const onChangeI18n = () => {
-			state.tagsViewNameIsI18n = !state.tagsViewNameIsI18n;
+			state.tagsViewNameIsI18n = !state.tagsViewNameIsI18n
 			if (state.tagsViewNameIsI18n) {
 				state.tagsViewName = JSON.stringify({
-					'zh-cn': '测试用',
-					en: 'test page',
-					'zh-tw': '測試用',
-				});
+					fa: 'صفحه تست',
+					en: 'test page'
+				})
 			} else {
-				state.tagsViewName = '我是普通路由测试tagsViewName(非国际化)';
+				state.tagsViewName = '我是普通路由测试tagsViewName(非国际化)'
 			}
-		};
+		}
 		return {
 			setViewHeight,
 			onGoDetailsClick,
 			onChangeI18n,
-			...toRefs(state),
-		};
-	},
-});
+			...toRefs(state)
+		}
+	}
+})
 </script>

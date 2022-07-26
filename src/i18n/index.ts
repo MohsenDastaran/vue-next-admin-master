@@ -5,30 +5,18 @@ import { useThemeConfig } from '/@/stores/themeConfig'
 import zhcnLocale from 'element-plus/lib/locale/lang/zh-cn'
 import faLocale from 'element-plus/lib/locale/lang/fa'
 import enLocale from 'element-plus/lib/locale/lang/en'
-import zhtwLocale from 'element-plus/lib/locale/lang/zh-tw'
 
-import nextZhcn from '/@/i18n/lang/zh-cn'
-import next from '/@/i18n/lang/en'
-import nextZhtw from '/@/i18n/lang/zh-tw'
+import translations from './lang/translations'
 
 import login from '/@/i18n/pages/login/en'
 import pagesFormI18nZhcn from '/@/i18n/pages/formI18n/zh-cn'
 import pagesFormI18nEn from '/@/i18n/pages/formI18n/en'
-import pagesFormI18nZhtw from '/@/i18n/pages/formI18n/zh-tw'
 
 const messages = {
-	[faLocale.name]: {
+	[zhcnLocale.name]: {
 		...faLocale,
 		message: {
-			...next.en,
-			...login.en,
-			...pagesFormI18nZhcn
-		}
-	},
-	[zhcnLocale.name]: {
-		...zhcnLocale,
-		message: {
-			...next['zh-cn'],
+			...translations.fa,
 			...login['zh-cn'],
 			...pagesFormI18nZhcn
 		}
@@ -36,17 +24,9 @@ const messages = {
 	[enLocale.name]: {
 		...enLocale,
 		message: {
-			...next.en,
+			...translations.en,
 			...login.en,
 			...pagesFormI18nEn
-		}
-	},
-	[zhtwLocale.name]: {
-		...zhtwLocale,
-		message: {
-			...next.zhtw,
-			...login.zhtw,
-			...pagesFormI18nZhtw
 		}
 	}
 }
