@@ -1,6 +1,6 @@
 <template>
 	<el-config-provider :size="getGlobalComponentSize" :locale="i18nLocale">
-		<router-view v-show="themeConfig.lockScreenTime > 1" />
+		<router-view :dir="rtl ? 'rtl' : 'ltr'" v-show="themeConfig.lockScreenTime > 1" />
 		<LockScreen v-if="themeConfig.isLockScreen" />
 		<Setings ref="setingsRef" v-show="themeConfig.lockScreenTime > 1" />
 		<CloseFull v-if="!themeConfig.isLockScreen" />
@@ -19,6 +19,7 @@ import setIntroduction from '/@/utils/setIconfont'
 import LockScreen from '/@/layout/lockScreen/index.vue'
 import Setings from '/@/layout/navBars/breadcrumb/setings.vue'
 import CloseFull from '/@/layout/navBars/breadcrumb/closeFull.vue'
+import { i18nStore } from './i18n'
 
 export default defineComponent({
 	name: 'app',
@@ -35,6 +36,9 @@ export default defineComponent({
 		})
 		const getGlobalComponentSize = computed(() => {
 			return other.globalComponentSize()
+		})
+		const rtl = computed(() => {
+			return i18nStore().isRTL
 		})
 		const openSetingsDrawer = () => {
 			setingsRef.value.openDrawer()
@@ -74,6 +78,7 @@ export default defineComponent({
 		return {
 			themeConfig,
 			setingsRef,
+			rtl,
 			getGlobalComponentSize,
 			...toRefs(state)
 		}
