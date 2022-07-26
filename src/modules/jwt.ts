@@ -84,7 +84,7 @@ class Jwt {
 
 	public async validateJwt() {
 		try {
-			const response = await ApiClient.get(apiPaths.validateJwt, {
+			await ApiClient.get(apiPaths.validateJwt, {
 				auth: true,
 				throw404: false,
 				throw401: false

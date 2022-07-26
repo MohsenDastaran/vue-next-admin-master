@@ -11,6 +11,7 @@ import { Session } from '/@/utils/storage'
 import { staticRoutes, rxLangPath } from './routes'
 import { initFrontEndControlRoutes } from '/@/router/frontEnd'
 import { initBackEndControlRoutes } from '/@/router/backEnd'
+import ejectUser from '../modules/ejectUser'
 
 const storesThemeConfig = useThemeConfig(pinia)
 const { themeConfig } = storeToRefs(storesThemeConfig)
@@ -56,6 +57,8 @@ export function formatTwoStageRoutes(arr: any) {
 }
 
 router.beforeEach(async (to, from, next) => {
+	console.log('To: ', to)
+
 	NProgress.configure({ showSpinner: false })
 	NProgress.start()
 	jwt.getJwtFromLocalAndCheck()
@@ -88,30 +91,42 @@ router.beforeEach(async (to, from, next) => {
 	}
 
 	_fixUrl(to.fullPath)
-	let langCode = to.params.lang
-	const pathWithoutLang = to.path.replace(`/${langCode}`, '')
-	const fullPathWithoutLang = to.fullPath.replace(`/${langCode}`, '')
-	const paths = router.getRoutes().map((route) => {
-		return route.path.replaceAll(rxLangPath, '')
-	})
 
-	if (paths.includes(to.path)) {
-		langCode = 'fa' || 'en'
-		// i18n.setActiveLangCode(langCode)
-		next()
-	} else if (
-		paths.includes(pathWithoutLang)
-		//  && i18n.isSupportedLang(langCode)
-	) {
-		// @todo en move to .env
-		if (langCode === 'en') {
-			redirectRoute(fullPathWithoutLang)
-		}
-		// i18n.setActiveLangCode(langCode)
-		next()
-	} else {
-		redirectError(404)
-	}
+	jwt
+		.validateJwt()
+		.then(() => {
+			console.log('ok jwt')
+
+			next()
+		})
+		.catch(() => {
+			alert('jwt error')
+			ejectUser()
+		})
+	// let langCode = to.params.lang
+	// const pathWithoutLang = to.path.replace(`/${langCode}`, '')
+	// const fullPathWithoutLang = to.fullPath.replace(`/${langCode}`, '')
+	// const paths = router.getRoutes().map((route) => {
+	// 	return route.path.replaceAll(rxLangPath, '')
+	// })
+
+	// if (paths.includes(to.path)) {
+	// 	langCode = 'fa' || 'en'
+	// 	// i18n.setActiveLangCode(langCode)
+	// 	next()
+	// } else if (
+	// 	paths.includes(pathWithoutLang)
+	// 	//  && i18n.isSupportedLang(langCode)
+	// ) {
+	// 	// @todo en move to .env
+	// 	if (langCode === 'en') {
+	// 		redirectRoute(fullPathWithoutLang)
+	// 	}
+	// 	// i18n.setActiveLangCode(langCode)
+	// 	next()
+	// } else {
+	// 	// redirectError(404)
+	// }
 })
 
 router.afterEach(() => {
@@ -119,6 +134,8 @@ router.afterEach(() => {
 })
 
 function _fixUrl(url: string) {
+	console.log('url: ', url)
+
 	let fixedUrl = url
 	const duplicateSlash = /\/{2,}/g
 	if (url.match(duplicateSlash)) fixedUrl = url.replace(duplicateSlash, '/')
@@ -128,7 +145,7 @@ function _fixUrl(url: string) {
 		return redirectRoute(fixedUrl)
 	}
 }
-function changePage({ to, query, isStatic }: { to: string; query?: {}; isStatic?: boolean }) {
+export function changePage({ to, query, isStatic }: { to: string; query?: {}; isStatic?: boolean }) {
 	if (isStatic) {
 		window.location.href = query ? to + query : to
 	} else {
@@ -145,10 +162,10 @@ function changePage({ to, query, isStatic }: { to: string; query?: {}; isStatic?
 			.catch(() => true)
 	}
 }
-function redirectError(errorCode: number) {
+export function redirectError(errorCode: number) {
 	window.location.href = window.location.origin + `/${errorCode}.html`
 }
-function redirectRoute(page: string) {
+export function redirectRoute(page: string) {
 	router.push(page[0] == '/' ? page : '/' + page).catch(() => true)
 }
 function vueModulePaths() {
