@@ -37,10 +37,10 @@ import { useThemeConfig } from '/@/stores/themeConfig'
 import logoMini from '/@/assets/logo-mini.svg'
 import loginIconTwo from '/@/assets/login-icon-two.svg'
 import { NextLoading } from '/@/utils/loading'
-import Account from '/@/views/login/component/account.vue'
-import Mobile from '/@/views/login/component/mobile.vue'
-import Scan from '/@/views/login/component/scan.vue'
-import { submit } from '/@/api/login/index'
+import Account from '/@/pages/login/components/account.vue'
+import Mobile from '/@/pages/login/components/mobile.vue'
+import Scan from '/@/pages/login/components/scan.vue'
+import { submit } from '/@/pages/login/controller'
 
 interface LoginState {
 	tabsActiveName: string

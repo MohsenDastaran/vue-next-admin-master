@@ -167,7 +167,6 @@ async function apiClientBody<T>(
 			const authenticatedJwt = await jwt.returnAvailableJwt()
 			headerParams['Authorization'] = `Bearer ${authenticatedJwt}`
 		} catch (error) {
-			alert(postFixPath)
 			router.push('login')
 			// router.changePage({ to: Login.name })
 		}

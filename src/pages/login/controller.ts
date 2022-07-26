@@ -49,22 +49,22 @@ export async function submit(emailOrMobile: string, password: string) {
 	// } else {
 	// }
 }
-
-export function useLoginApi() {
-	return {
-		signIn: (params: object) => {
-			return request({
-				url: '/user/signIn',
-				method: 'post',
-				data: params
-			})
-		},
-		signOut: (params: object) => {
-			return request({
-				url: '/user/signOut',
-				method: 'post',
-				data: params
-			})
-		}
-	}
-}
+// previous api
+// export function useLoginApi() {
+// 	return {
+// 		signIn: (params: object) => {
+// 			return request({
+// 				url: '/user/signIn',
+// 				method: 'post',
+// 				data: params
+// 			})
+// 		},
+// 		signOut: (params: object) => {
+// 			return request({
+// 				url: '/user/signOut',
+// 				method: 'post',
+// 				data: params
+// 			})
+// 		}
+// 	}
+// }

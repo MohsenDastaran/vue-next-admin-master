@@ -91,18 +91,20 @@ router.beforeEach(async (to, from, next) => {
 	}
 
 	_fixUrl(to.fullPath)
+	// jwt validateJwt should work
 
-	jwt
-		.validateJwt()
-		.then(() => {
-			console.log('ok jwt')
+	// jwt
+	// 	.validateJwt()
+	// 	.then(() => {
+	// 		console.log('ok jwt')
 
-			next()
-		})
-		.catch(() => {
-			alert('jwt error')
-			ejectUser()
-		})
+	// 		// next()
+	// 	})
+	// 	.catch(() => {
+	// 		alert('jwt error')
+	// 		// ejectUser()
+	// 	})
+
 	// let langCode = to.params.lang
 	// const pathWithoutLang = to.path.replace(`/${langCode}`, '')
 	// const fullPathWithoutLang = to.fullPath.replace(`/${langCode}`, '')
@@ -134,8 +136,6 @@ router.afterEach(() => {
 })
 
 function _fixUrl(url: string) {
-	console.log('url: ', url)
-
 	let fixedUrl = url
 	const duplicateSlash = /\/{2,}/g
 	if (url.match(duplicateSlash)) fixedUrl = url.replace(duplicateSlash, '/')
