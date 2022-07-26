@@ -11,7 +11,6 @@ import { Session } from '/@/utils/storage'
 import { staticRoutes, rxLangPath } from './routes'
 import { initFrontEndControlRoutes } from '/@/router/frontEnd'
 import { initBackEndControlRoutes } from '/@/router/backEnd'
-import ejectUser from '../modules/ejectUser'
 
 const storesThemeConfig = useThemeConfig(pinia)
 const { themeConfig } = storeToRefs(storesThemeConfig)
@@ -57,8 +56,6 @@ export function formatTwoStageRoutes(arr: any) {
 }
 
 router.beforeEach(async (to, from, next) => {
-	console.log('To: ', to)
-
 	NProgress.configure({ showSpinner: false })
 	NProgress.start()
 	jwt.getJwtFromLocalAndCheck()

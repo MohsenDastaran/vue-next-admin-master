@@ -1,6 +1,8 @@
 import { createI18n } from 'vue-i18n'
+
 import pinia from '/@/stores/index'
-import { storeToRefs } from 'pinia'
+import { ISO639 } from './ISO639'
+import { storeToRefs, defineStore } from 'pinia'
 import { useThemeConfig } from '/@/stores/themeConfig'
 import zhcnLocale from 'element-plus/lib/locale/lang/zh-cn'
 import faLocale from 'element-plus/lib/locale/lang/fa'
@@ -12,8 +14,19 @@ import login from '/@/i18n/pages/login/en'
 import pagesFormI18nZhcn from '/@/i18n/pages/formI18n/zh-cn'
 import pagesFormI18nEn from '/@/i18n/pages/formI18n/en'
 
+export const i18nStore = defineStore('i18n', {
+	state: () => ({
+		isRTL: isRTLLang() as boolean
+	}),
+	actions: {
+		rtlManager() {
+			this.isRTL = isRTLLang()
+			console.log(this.isRTL)
+		}
+	}
+})
 const messages = {
-	[zhcnLocale.name]: {
+	[faLocale.name]: {
 		...faLocale,
 		message: {
 			...translations.fa,
@@ -30,13 +43,18 @@ const messages = {
 		}
 	}
 }
-console.log(messages)
 
-// 读取 pinia 默认语言
 const stores = useThemeConfig(pinia)
 const { themeConfig } = storeToRefs(stores)
 
-// https://vue-i18n.intlify.dev/guide/essentials/fallback.html#explicit-fallback-with-one-locale
+export const rtlLanguages: Array<ISO639> = [ISO639.Persian, ISO639.Arabic, ISO639.Hebrew]
+function isRTLLang(): boolean {
+	for (const rtlLang in rtlLanguages) {
+		if (rtlLanguages[rtlLang] == getLocale()) return true
+	}
+	return false
+}
+
 export const i18n = createI18n({
 	silentTranslationWarn: true,
 	missingWarn: false,
@@ -46,3 +64,7 @@ export const i18n = createI18n({
 	fallbackLocale: zhcnLocale.name,
 	messages
 })
+
+export const getLocale = () => {
+	return i18n.global.locale
+}
