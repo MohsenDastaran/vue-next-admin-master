@@ -49,7 +49,9 @@ export default defineComponent({
 		})
 		onMounted(() => {
 			nextTick(() => {
-				proxy.mittBus.on('openSetingsDrawer', () => {})
+				proxy.mittBus.on('openSetingsDrawer', () => {
+					openSetingsDrawer()
+				})
 				proxy.mittBus.on('getI18nConfig', (locale: string) => {
 					;(state.i18nLocale as string | null) = locale
 				})
