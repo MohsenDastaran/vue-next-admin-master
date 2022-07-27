@@ -7,7 +7,7 @@
 						<template #default>
 							<div>1、设置非国际化：格式：tagsViewName=xxx</div>
 							<br />
-							<div>2、设置国际化：格式：tagsViewName=JSON.stringify({"zh-cn":"测试用","en":"test+page","zh-tw":"測試用"})</div>
+							<div>2、设置国际化：格式：tagsViewName=JSON.stringify({"zh-cn":"测试用","en":"test+page"})</div>
 							<br />
 							<div>3、设置国际化后，去顶栏切换语言查看演示效果</div>
 							<br />
@@ -34,69 +34,68 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRefs, reactive, computed } from 'vue';
-import { useRouter } from 'vue-router';
-import { ElMessage } from 'element-plus';
-import { storeToRefs } from 'pinia';
-import { useThemeConfig } from '/@/stores/themeConfig';
-import { useTagsViewRoutes } from '/@/stores/tagsViewRoutes';
+import { defineComponent, toRefs, reactive, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
+import { storeToRefs } from 'pinia'
+import { useThemeConfig } from '/@/stores/themeConfig'
+import { useTagsViewRoutes } from '/@/stores/tagsViewRoutes'
 
 export default defineComponent({
 	name: 'paramsDynamic',
 	setup() {
-		const storesTagsViewRoutes = useTagsViewRoutes();
-		const storesThemeConfig = useThemeConfig();
-		const { themeConfig } = storeToRefs(storesThemeConfig);
-		const { isTagsViewCurrenFull } = storeToRefs(storesTagsViewRoutes);
+		const storesTagsViewRoutes = useTagsViewRoutes()
+		const storesThemeConfig = useThemeConfig()
+		const { themeConfig } = storeToRefs(storesThemeConfig)
+		const { isTagsViewCurrenFull } = storeToRefs(storesTagsViewRoutes)
 		const state = reactive({
 			value: '',
 			tagsViewName: '',
-			tagsViewNameIsI18n: false,
-		});
-		const router = useRouter();
+			tagsViewNameIsI18n: false
+		})
+		const router = useRouter()
 		// 设置 view 的高度
 		const setViewHeight = computed(() => {
-			let { isTagsview } = themeConfig.value;
+			let { isTagsview } = themeConfig.value
 			if (isTagsViewCurrenFull.value) {
-				return `30px`;
+				return `30px`
 			} else {
-				if (isTagsview) return `114px`;
-				else return `80px`;
+				if (isTagsview) return `114px`
+				else return `80px`
 			}
-		});
+		})
 		// 跳转到详情
 		const onGoDetailsClick = () => {
-			if (!state.tagsViewName) return ElMessage.warning('动态路由tagsViewName为必填，因为路由配置了');
-			if (!state.value) return ElMessage.warning('路由参数id值为必填');
+			if (!state.tagsViewName) return ElMessage.warning('动态路由tagsViewName为必填，因为路由配置了')
+			if (!state.value) return ElMessage.warning('路由参数id值为必填')
 			// name 值为路由中的 name
 			router.push({
 				name: 'paramsDynamicDetails',
 				params: {
 					t: 'vue-next-admin',
 					id: state.value,
-					tagsViewName: state.tagsViewName,
-				},
-			});
-			state.value = '';
-		};
+					tagsViewName: state.tagsViewName
+				}
+			})
+			state.value = ''
+		}
 		const onChangeI18n = () => {
-			state.tagsViewNameIsI18n = !state.tagsViewNameIsI18n;
+			state.tagsViewNameIsI18n = !state.tagsViewNameIsI18n
 			if (state.tagsViewNameIsI18n) {
 				state.tagsViewName = JSON.stringify({
 					'zh-cn': '我是动态路由',
-					en: 'Im dynamic routing',
-					'zh-tw': '我是動態路由',
-				});
+					en: 'Im dynamic routing'
+				})
 			} else {
-				state.tagsViewName = '我是动态路由测试tagsViewName(非国际化)';
+				state.tagsViewName = '我是动态路由测试tagsViewName(非国际化)'
 			}
-		};
+		}
 		return {
 			setViewHeight,
 			onGoDetailsClick,
 			onChangeI18n,
-			...toRefs(state),
-		};
-	},
-});
+			...toRefs(state)
+		}
+	}
+})
 </script>
