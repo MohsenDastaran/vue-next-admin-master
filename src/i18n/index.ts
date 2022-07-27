@@ -10,7 +10,7 @@ import enLocale from 'element-plus/lib/locale/lang/en'
 
 import translations from './lang/translations'
 
-import login from '/@/i18n/pages/login/en'
+import login from '/@/pages/login/i18n.js'
 import pagesFormI18nZhcn from '/@/i18n/pages/formI18n/zh-cn'
 import pagesFormI18nEn from '/@/i18n/pages/formI18n/en'
 

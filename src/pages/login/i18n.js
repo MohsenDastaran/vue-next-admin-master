@@ -1,4 +1,3 @@
-// 定义内容
 export default {
 	en: {
 		label: {
@@ -28,10 +27,10 @@ export default {
 		},
 		signInText: 'welcome back!'
 	},
-	'zh-cn': {
+	fa: {
 		label: {
-			one1: '用户名登录',
-			two2: '手机号登录'
+			one1: 'ورود با شناسه کاربری',
+			two2: 'ورود با موبایل'
 		},
 		link: {
 			one3: '第三方登录',
@@ -80,6 +79,6 @@ export default {
 		scan: {
 			text: '打開手機掃一掃，快速登錄/注册'
 		},
-		signInText: '歡迎回來！'
+		signInText: 'خوش آمدید'
 	}
 }
