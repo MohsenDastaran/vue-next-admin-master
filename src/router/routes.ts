@@ -1114,36 +1114,6 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 					roles: ['admin', 'common'],
 					icon: 'iconfont icon-gongju'
 				}
-			},
-			{
-				path: '/link',
-				name: 'layoutLinkView',
-				component: () => import('/@/layout/routerView/link.vue'),
-				meta: {
-					title: 'message.router.layoutLinkView',
-					isLink: 'https://element-plus.gitee.io/#/zh-CN/component/installation',
-					isHide: false,
-					isKeepAlive: false,
-					isAffix: false,
-					isIframe: false,
-					roles: ['admin'],
-					icon: 'iconfont icon-caozuo-wailian'
-				}
-			},
-			{
-				path: '/iframes',
-				name: 'layoutIfameView',
-				component: () => import('/@/layout/routerView/iframes.vue'),
-				meta: {
-					title: 'message.router.layoutIfameView',
-					isLink: 'https://nodejs.org/zh-cn/',
-					isHide: false,
-					isKeepAlive: false,
-					isAffix: true,
-					isIframe: true,
-					roles: ['admin'],
-					icon: 'iconfont icon-neiqianshujuchucun'
-				}
 			}
 		]
 	}

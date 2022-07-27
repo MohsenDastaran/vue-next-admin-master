@@ -20,7 +20,7 @@ const viteConfig = defineConfig((mode: ConfigEnv) => {
 		base: mode.command === 'serve' ? './' : env.VITE_PUBLIC_PATH,
 		hmr: true,
 		optimizeDeps: {
-			include: ['element-plus/lib/locale/lang/zh-cn', 'element-plus/lib/locale/lang/en']
+			include: ['element-plus/lib/locale/lang/fa', 'element-plus/lib/locale/lang/en']
 		},
 		server: {
 			host: '0.0.0.0',

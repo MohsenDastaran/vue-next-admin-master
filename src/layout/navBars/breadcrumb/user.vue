@@ -109,7 +109,7 @@ export default defineComponent({
 		const searchRef = ref()
 		const state = reactive({
 			isScreenfull: false,
-			disabledI18n: 'zh-cn',
+			disabledI18n: 'fa',
 			disabledSize: 'large'
 		})
 		const layoutUserFlexNum = computed(() => {

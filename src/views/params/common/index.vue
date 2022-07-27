@@ -7,7 +7,7 @@
 						<template #default>
 							<div>1、设置非国际化：格式：tagsViewName=xxx</div>
 							<br />
-							<div>2、设置国际化：格式：tagsViewName=JSON.stringify({"zh-cn":"测试用","en":"test+page"})</div>
+							<div>2、设置国际化：格式：tagsViewName=JSON.stringify({"fa":"صفحه تست","en":"test+page"})</div>
 							<br />
 							<div>3、设置国际化后，去顶栏切换语言查看演示效果</div>
 							<br />

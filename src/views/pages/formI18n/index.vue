@@ -3,7 +3,7 @@
 		<el-card shadow="hover" header="表单国际化演示(不适用于动态项 form-item)">
 			<div style="text-align: center; margin-top: 15px">
 				<el-radio-group v-model="radio" size="default" @change="onRadioChange">
-					<el-radio-button label="zh-cn">中文简体</el-radio-button>
+					<el-radio-button label="fa">中文简体</el-radio-button>
 					<el-radio-button label="en">英文</el-radio-button>
 				</el-radio-group>
 			</div>
@@ -38,7 +38,7 @@ export default defineComponent({
 	setup() {
 		const { proxy } = <any>getCurrentInstance();
 		const state = reactive({
-			radio: 'zh-cn',
+			radio: 'fa',
 			form: {
 				name: '',
 				email: '',
