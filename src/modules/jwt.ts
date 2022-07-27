@@ -1,16 +1,9 @@
 // import { UserDetails, UserModule } from '@/store/user'
 import storage, { StorageKey } from './storage'
 // import messageHandler from '@/modules/toast'
-// import i18n from '@/modules/i18n'
-// import t from './i18n.json'
+
 import { apiPaths } from '/@/api/apiPaths'
 import ApiClient from '/@/api/modules/api'
-
-// const $t = i18n.makeTranslator(t)
-
-interface BaseJWT {
-	exp: number
-}
 
 class Jwt {
 	private jwt: string | null = null

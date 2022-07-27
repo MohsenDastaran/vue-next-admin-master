@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia';
-import { RequestOldRoutesState } from './interface';
+import { defineStore } from 'pinia'
+import { RequestOldRoutesState } from './interface'
 
 /**
  * 后端返回原始路由(未处理时)
@@ -7,11 +7,11 @@ import { RequestOldRoutesState } from './interface';
  */
 export const useRequestOldRoutes = defineStore('requestOldRoutes', {
 	state: (): RequestOldRoutesState => ({
-		requestOldRoutes: [],
+		requestOldRoutes: []
 	}),
 	actions: {
 		async setRequestOldRoutes(routes: Array<string>) {
-			this.requestOldRoutes = routes;
-		},
-	},
-});
+			this.requestOldRoutes = routes
+		}
+	}
+})
